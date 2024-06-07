@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم مراجعة الكتب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMARE8F8O0L1R8b3Od3/54Do1e00lKP5F11ydQm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #ffe4ad;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar .logo {
+            font-size: 1.5em;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .main-content {
+            display: flex;
+            margin-top: 20px;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        .column {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .column.main {
+            flex: 0 0 60%;
+        }
+
+        .column.secondary {
+            flex: 0 0 30%;
+        }
+
+        .welcome-section h1 span {
+            color: #007bff;
+        }
+
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #a9a7a4;
+            color: white;
+            padding: 20px;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+        .sidebar .close-btn {
+            text-align: left;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.8em;
+        }
+
+        .sidebar nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            display: block;
+            transition: background-color 0.3s;
+            padding-right: 15px;
+        }
+
+        .sidebar nav a:hover {
+            color: black;
+            background-color: #ffe4ad;
+        }
+
+        .sidebar-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-footer a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .sidebar-footer a:hover {
+            color: #0056b3;
+        }
+
+        .sidebar-footer .logo {
+            display: block;
+            margin-left: auto;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .column.main, .column.secondary {
+                flex: 1 1 100%;
+            }
+
+            .sidebar {
+                display: flex;
+            }
+
+            .navbar {
+                justify-content: space-between;
+            }
+
+            .navbar .logo {
+                order: 1;
+            }
+
+            .menu-toggle {
+                order: 2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><img style="width: 50px;" src="https://wa022.github.io/reviewwithoumaima/logoB.png" alt="شعار" class="logo"></div>
+        <div class="menu-toggle">
+            <img id="menu-icon" src="https://img.icons8.com/ios-filled/24/000000/menu.png" alt="Menu">
+        </div>
+        <div class="menu">
+            <a href="#">الرئيسية</a>
+            <a href="#">الكتب</a>
+            <a href="#">الفيديوهات</a>
+            <a href="#">الصور</a>
+            <a href="#">الصوتيات</a>
+            <a href="#">الأرشيف</a>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="close-btn">
+            <img id="close-icon" src="https://img.icons8.com/ios-filled/24/000000/long-arrow-right.png" alt="Close">
+        </div>
+        <div class="logo"><img style="width: 50px;" src="https://wa022.github.io/reviewwithoumaima/logoB.png" alt="شعار" class="logo"></div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#">الكتب</a>
+            <a href="#">الفيديوهات</a>
+            <a href="#">الصور</a>
+            <a href="#">الصوتيات</a>
+            <a href="#">الأرشيف</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="column main">
+            <div class="welcome-section">
+                <h1>مرحبًا بك في <span>مراجعة الكتب</span></h1>
+                <p>مرحبًا بك مرة أخرى، <span>عامر!</span> استمتع بمراجعة وتقييم الكتب المفضلة لديك!</p>
+            </div>
+            <div class="content-section">
+                <div class="card">
+                    <h2>الكتب</h2>
+                    <p>45 كتاب</p>
+                </div>
+                <div class="card">
+                    <h2>الفيديوهات</h2>
+                    <p>45 فيديو</p>
+                </div>
+                <div class="card">
+                    <h2>الصور</h2>
+                    <p>745 صورة</p>
+                </div>
+                <div class="card">
+                    <h2>الصوتيات</h2>
+                    <p>45 ملف</p>
+                </div>
+                <div class="card">
+                    <h2>الأرشيفات</h2>
+                    <p>75 ملف</p>
+                </div>
+            </div>
+        </div>
+        <div class="column secondary">
+            <div class="uploading-history">
+                <h2>تاريخ رفع الملفات</h2>
+                <!-- يمكن إضافة رسوم بيانية هنا -->
+            </div>
+            <div class="storage-info">
+                <h2>مساحة التخزين الخاصة بك</h2>
+                <p>150 جيجابايت من 200 جيجابايت مستخدمة</p>
+            </div>
+            <div class="recent-uploads">
+                <h2>الملفات المرفوعة حديثًا</h2>
+                <p>IMG_1024934.jpg</p>
+                <p>VID_29403434.mp4</p>
+                <!-- أضف المزيد من الملفات هنا -->
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const sidebar = document.querySelector('.sidebar');
+            const closeBtn = document.querySelector('.close-btn');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('show');
+                if (sidebar.classList.contains('show')) {
+                    menuIcon.style.display = 'none';
+                    closeIcon.style.display = 'block';
+                }
+            });
+
+            closeBtn.addEventListener('click', function() {
+                sidebar.classList.remove('show');
+                menuIcon.style.display = 'block';
+                closeIcon.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
