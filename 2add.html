@@ -18,8 +18,8 @@
             background-color: #ff6f61;
             padding: 10px 20px;
             display: flex;
-           justify-content: space-around; 
-           align-items: center;
+            justify-content: space-between;
+            align-items: center;
             color: white;
         }
 
@@ -135,6 +135,7 @@
 
             .menu-toggle {
                 display: block;
+                margin-top: 5px;
             }
 
             .main-content {
@@ -147,6 +148,7 @@
 
             .sidebar {
                 display: flex;
+                border-radius: 15px 0 0 0;
             }
         }
 
@@ -204,8 +206,8 @@
         }
 
         .loading-image {
-            width: 80px;
-            height: 80px;
+            width: 30px;
+            height: 30px;
             animation: spin 2s linear infinite;
         }
 
@@ -282,7 +284,7 @@
     </div>
     <div class="sidebar">
         <div class="close-btn">
-            <img id="close-icon" src="https://img.icons8.com/ios-filled/24/ffffff/long-arrow-right.png" alt="Close">
+            <img style="height: 20px;" id="close-icon" src="https://wa022.github.io/2028/left-arrow.png" alt="Close">
         </div>
         <div class="logo"><img src="https://wa022.github.io/6/logow.png" alt="شعار" style="width: 80px;"></div>
         <nav>
@@ -414,7 +416,6 @@
 
             setTimeout(() => {
                 document.getElementById('cover').style.display = 'none';
-                document.getElementById('uploadForm').style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('uploadForm').reset();
                 document.getElementById('uploaded-image-preview').style.display = 'none';
@@ -424,7 +425,6 @@
 
         function resetForm() {
             document.getElementById('success-message').style.display = 'none';
-            document.getElementById('uploadForm').style.display = 'block';
         }
 
         function navigateToLibrary() {
