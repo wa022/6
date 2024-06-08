@@ -147,7 +147,6 @@
 
             .sidebar {
                 display: flex;
-                border-radius: 15px 0 0 0;
             }
         }
 
@@ -205,8 +204,8 @@
         }
 
         .loading-image {
-            width: 30px;
-            height: 30px;
+            width: 80px;
+            height: 80px;
             animation: spin 2s linear infinite;
         }
 
@@ -415,6 +414,7 @@
 
             setTimeout(() => {
                 document.getElementById('cover').style.display = 'none';
+                document.getElementById('uploadForm').style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('uploadForm').reset();
                 document.getElementById('uploaded-image-preview').style.display = 'none';
@@ -424,6 +424,7 @@
 
         function resetForm() {
             document.getElementById('success-message').style.display = 'none';
+            document.getElementById('uploadForm').style.display = 'block';
         }
 
         function navigateToLibrary() {
