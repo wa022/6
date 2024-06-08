@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحديث معلومات الجدول</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMARE8F8O0L1R8b3Od3/54Do1e00lKP5F11ydQm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+
+        .navbar .logo img {
+            width: 50px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .column {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .column.main {
+            flex: 1 1 60%;
+        }
+
+        .column.secondary {
+            flex: 1 1 30%;
+        }
+
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #a9a7a4;
+            color: white;
+            padding: 20px;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+        .sidebar .close-btn {
+            text-align: left;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.8em;
+        }
+
+        .sidebar nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            display: block;
+            transition: background-color 0.3s;
+            padding-right: 15px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #ff6f61;
+        }
+
+        .sidebar-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-footer a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .sidebar-footer a:hover {
+            color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .column.main, .column.secondary {
+                flex: 1 1 100%;
+            }
+
+            .sidebar {
+                display: flex;
+            }
+        }
+
+        .field-container {
+            margin-bottom: 20px;
+        }
+
+        .field-container label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .field-container input[type="text"],
+        .field-container textarea {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .field-container button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .field-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><img src="https://wa022.github.io/6/logow.png" alt="شعار"></div>
+        <div class="menu-toggle">
+            <img id="menu-icon" src="https://img.icons8.com/ios-filled/24/ffffff/menu.png" alt="Menu">
+        </div>
+        <div class="menu">
+            <a href="#">الرئيسية</a>
+            <a href="#">الكتب</a>
+            <a href="#">الفيديوهات</a>
+            <a href="#">الصور</a>
+            <a href="#">الصوتيات</a>
+            <a href="#">الأرشيف</a>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="close-btn">
+            <img id="close-icon" src="https://img.icons8.com/ios-filled/24/ffffff/long-arrow-right.png" alt="Close">
+        </div>
+        <div class="logo"><img src="https://wa022.github.io/6/logow.png" alt="شعار" style="width: 80px;"></div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#">الكتب</a>
+            <a href="#">الفيديوهات</a>
+            <a href="#">الصور</a>
+            <a href="#">الصوتيات</a>
+            <a href="#">الأرشيف</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="column main">
+            <div class="welcome-section">
+                <div class="container">
+                    <div class="content">
+                        <div class="user-details">
+                            <div class="field-container">
+                                <label for="name">الاسم:</label>
+                                <input type="text" id="name" readonly>
+                                <button id="nameEditButton" onclick="editField('name')">تعديل</button>
+                                <button id="nameUpdateButton" style="display: none;" onclick="updateField('name')">تحديث</button>
+                            </div>
+                            <div class="field-container">
+                                <label for="whoAmI">من أنا:</label>
+                                <textarea id="whoAmI" rows="10" cols="30" readonly></textarea>
+                                <button id="whoAmIEditButton" onclick="editField('whoAmI')">تعديل</button>
+                                <button id="whoAmIUpdateButton" style="display: none;" onclick="updateField('whoAmI')">تحديث</button>
+                            </div>
+                            <div class="field-container">
+                                <label for="socialFacebook">فيسبوك:</label>
+                                <input type="text" id="socialFacebook" readonly>
+                                <button id="socialFacebookEditButton" onclick="editField('socialFacebook')">تعديل</button>
+                                <button id="socialFacebookUpdateButton" style="display: none;" onclick="updateField('socialFacebook')">تحديث</button>
+                            </div>
+                            <div class="field-container">
+                                <label for="socialInstagram">انستغرام:</label>
+                                <input type="text" id="socialInstagram" readonly>
+                                <button id="socialInstagramEditButton" onclick="editField('socialInstagram')">تعديل</button>
+                                <button id="socialInstagramUpdateButton" style="display: none;" onclick="updateField('socialInstagram')">تحديث</button>
+                            </div>
+                            <div class="field-container">
+                                <label for="email">البريد الالكتروني:</label>
+                                <input type="text" id="email" readonly>
+                                <button id="emailEditButton" onclick="editField('email')">تعديل</button>
+                                <button id="emailUpdateButton" style="display: none;" onclick="updateField('email')">تحديث</button>
+                            </div>
+                            <script>
+                                function editField(fieldId) {
+                                    document.getElementById(fieldId).readOnly = false;
+                                    document.getElementById(fieldId).focus();
+                                    document.getElementById(fieldId).select();
+                                    document.getElementById(fieldId + 'UpdateButton').style.display = 'inline';
+                                    document.getElementById(fieldId + 'EditButton').style.display = 'none';
+                                }
+
+                                function updateField(fieldId) {
+                                    document.getElementById(fieldId).readOnly = true;
+                                    document.getElementById(fieldId + 'UpdateButton').style.display = 'none';
+                                    document.getElementById(fieldId + 'EditButton').style.display = 'inline';
+                                }
+
+                                fetch('https://sheets.googleapis.com/v4/spreadsheets/1zuUB3TzYNgWFfSSBs7ySAQX-EVGhdlqBDEIFhiBCBLk/values/info!A1:I100?key=AIzaSyBhiqVypmyLHYPmqZYtvdSvxEopcLZBdYU')
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        const values = data.values;
+
+                                        document.getElementById('name').value = values[1][0] || '';
+                                        document.getElementById('whoAmI').value = values[2][0] || '';
+                                        document.getElementById('socialFacebook').value = values[2][3] || '';
+                                        document.getElementById('socialInstagram').value = values[2][4] || '';
+                                        document.getElementById('email').value = values[5][2] || '';
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching data:', error);
+                                    });
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column secondary">
+            <!-- يمكن وضع محتوى إضافي هنا -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const sidebar = document.querySelector('.sidebar');
+
+            menuIcon.addEventListener('click', () => {
+                sidebar.classList.add('show');
+            });
+
+            closeIcon.addEventListener('click', () => {
+                sidebar.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
