@@ -249,6 +249,9 @@
                                 <button id="emailEditButton" onclick="editField('email')">تعديل</button>
                                 <button id="emailUpdateButton" style="display: none;" onclick="updateField('email')">تحديث</button>
                             </div>
+                            <div class="field-container">
+                                <button id="submitAllButton" onclick="submitAll()">إرسال</button>
+                            </div>
                             <script>
                                 function editField(fieldId) {
                                     document.getElementById(fieldId).readOnly = false;
@@ -262,6 +265,14 @@
                                     document.getElementById(fieldId).readOnly = true;
                                     document.getElementById(fieldId + 'UpdateButton').style.display = 'none';
                                     document.getElementById(fieldId + 'EditButton').style.display = 'inline';
+                                }
+
+                                function submitAll() {
+                                    const isConfirmed = confirm("هل أنت متأكد أنك تريد تحديث البيانات؟");
+                                    if (isConfirmed) {
+                                        // هنا يمكنك إضافة منطق لإرسال البيانات إلى الخادم أو تخزينها في قاعدة بيانات
+                                        alert("تم تحديث البيانات بنجاح!");
+                                    }
                                 }
 
                                 fetch('https://sheets.googleapis.com/v4/spreadsheets/1zuUB3TzYNgWFfSSBs7ySAQX-EVGhdlqBDEIFhiBCBLk/values/info!A1:I100?key=AIzaSyBhiqVypmyLHYPmqZYtvdSvxEopcLZBdYU')
