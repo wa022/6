@@ -15,12 +15,14 @@
         }
 
         .navbar {
-            background-color: #ff6f61;
+            background-color: #080808;
             padding: 10px 20px;
             display: flex;
-            justify-content: space-between;
+            justify-content:space-between;  
             align-items: center;
             color: white;
+            padding-left: 10%;
+            padding-right: 10%;
         }
 
         .navbar .logo img {
@@ -37,6 +39,16 @@
             text-decoration: none;
             font-size: 1em;
         }
+
+       .menu a:hover {
+            color: #f2ab19;
+            text-decoration: none;
+           font-weight: bold;
+           
+        }
+
+
+
 
         .menu-toggle {
             display: none;
@@ -72,7 +84,7 @@
             right: 0;
             width: 250px;
             height: 100vh;
-            background-color: #a9a7a4;
+            background-color: #383434;
             color: white;
             padding: 20px;
             z-index: 1000;
@@ -102,14 +114,15 @@
             color: white;
             text-decoration: none;
             padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px 0 0 0;
             display: block;
             transition: background-color 0.3s;
             padding-right: 15px;
         }
 
         .sidebar nav a:hover {
-            background-color: #ff6f61;
+            background-color: #f2ab19;
+            color: #080808;
         }
 
         .sidebar-footer {
@@ -169,22 +182,24 @@
         }
 
         .form-btn {
-            background-color: #ff6f61;
-            color: white;
+            background-color: #f2ab19;
+            color: #080808;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
+            width: 30%;
         }
 
         .form-btn:hover {
-            background-color: #e65c55;
+            background-color: #080808;
+             color: #f2ab19;
         }
 
         .custom-file-upload {
-            border: 1px solid #ff6f61;
-            color: #ff6f61;
+            border: 1px solid #f2ab19;
+            color: #f2ab19;
             background-color: #fff;
             padding: 10px 20px;
             border-radius: 14px;
@@ -196,8 +211,8 @@
         }
 
         .custom-file-upload:hover {
-            background-color: #ff6f61;
-            color: #fff;
+            background-color:#f2ab19;
+            color: #080808;
         }
 
         @keyframes spin {
