@@ -206,8 +206,8 @@
         }
 
         .loading-image {
-            width: 30px;
-            height: 30px;
+            width: 50px;
+            height: 50px;
             animation: spin 2s linear infinite;
         }
 
@@ -306,8 +306,11 @@
                 <div class="container">
                     <div class="content">
                         <div class="user-details">
-                            <form id="uploadForm" onsubmit="submitAndClearForm(event)">
+                            
+                            <form id="uploadForm" onsubmit="submitAndClearForm(event);">
+                            <h2>إضافة مراجعة</h2>
                                 <div class="input-box">
+                                
                                     <label for="file" class="form-label">عنوان الكتاب</label>
                                     <input type="text" id="file" name="عنوان_الكتاب" class="form-input" placeholder="ادخلي عنوان الكتاب" required>
                                 </div>
@@ -343,10 +346,8 @@
                                     <label for="avi" class="form-label">التقييم</label>
                                     <input type="text" id="avi" name="التقييم" class="form-input" placeholder="ادخلي تقييمك (عدد النجوم من 1 الى 5)" required>
                                 </div>
-                                <div class="input-box">
-                                    <label for="message" class="form-label">نبذة عن الكتاب</label>
-                                    <textarea id="message" name="نبذة_عن_الكتاب" class="form-input" placeholder="اكتبي نبذة عن الكتاب" rows="5" required></textarea>
-                                </div>
+                                
+                                
                                 <div class="input-box">
                                     <label for="molakhas" class="form-label">الملخص</label>
                                     <textarea id="molakhas" name="الملخص" rows="5" cols="33" class="form-input" placeholder="ادخلي ملخصا للكتاب او الرواية" required></textarea>
@@ -358,14 +359,14 @@
                                 <button type="submit" class="form-btn">إرسال</button>
                             </form>
                             <div id="success-message">
-                                <h3>تم رفع الكتاب بنجاح!</h3>
+                                <h3>تم ارسال المراجعة بنجاج!</h3>
                                 <div class="success-buttons">
-                                    <button onclick="resetForm()">رفع كتاب آخر</button>
-                                    <button onclick="navigateToLibrary()">عرض المكتبة</button>
+                                    <button onclick="resetForm()">إضافة مراجعة</button>
+                                    <button onclick="navigateToLibrary()">الصفحة الرئيسية</button>
                                 </div>
                             </div>
                             <div id="cover">
-                                <img class="loading-image" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="loading">
+                                <img class="loading-image" src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="loading" style="width: 100px; height: 100px;">
                                 <span>جاري التحميل...</span>
                             </div>
                         </div>
@@ -384,13 +385,20 @@
             const closeIcon = document.getElementById('close-icon');
             const sidebar = document.querySelector('.sidebar');
 
-            menuIcon.addEventListener('click', () => {
-                sidebar.classList.add('show');
-            });
 
-            closeIcon.addEventListener('click', () => {
-                sidebar.classList.remove('show');
-            });
+
+          document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.toggle('show');
+        });
+
+        document.querySelector('.close-btn').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('show');
+        });
+
+
+
+
+           
         });
 
         function updateImageDisplay() {
@@ -417,14 +425,16 @@
             setTimeout(() => {
                 document.getElementById('cover').style.display = 'none';
                 document.getElementById('success-message').style.display = 'block';
-                document.getElementById('uploadForm').reset();
-                document.getElementById('uploaded-image-preview').style.display = 'none';
-                document.querySelector('.preview p').style.display = 'block';
+                document.getElementById('uploadForm').style.display = 'none';
             }, 2000);
         }
 
         function resetForm() {
             document.getElementById('success-message').style.display = 'none';
+            document.getElementById('uploadForm').style.display = 'block';
+            document.getElementById('uploadForm').reset();
+            document.getElementById('uploaded-image-preview').style.display = 'none';
+            document.querySelector('.preview p').style.display = 'block';
         }
 
         function navigateToLibrary() {
