@@ -80,20 +80,31 @@
     <div class="message-container">
         <div class="user-info">
             <img src="https://wa022.github.io/6/user.png" alt="User">
-            <div><strong>هدى الريحاني</strong></div>
+            <div><strong id="user-name">اسم المستخدم</strong></div>
         </div>
-        <div class="message-content">
-            أبي الحبيب، أنت النور الذي يضيء حياتي والنبع الذي أرتوي منه حباً وحناناً. أنت الأب الذي يُشار إليه بالبنان ويفتخر به بين الأنام، فهنيئاً لي بك أيها الأب العظيم.
+        <div class="message-content" id="message-content">
+            محتوى الرسالة
         </div>
         <div class="email-container">
-            <div>houda@gmail.com</div>
+            <div id="user-email">البريد الإلكتروني</div>
             <button onclick="copyEmail()">نسخ البريد الإلكتروني</button>
         </div>
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const name = urlParams.get('name');
+            const email = urlParams.get('email');
+            const message = urlParams.get('message');
+
+            document.getElementById('user-name').textContent = name;
+            document.getElementById('user-email').textContent = email;
+            document.getElementById('message-content').textContent = message;
+        });
+
         function copyEmail() {
-            const email = 'houda@gmail.com';
+            const email = document.getElementById('user-email').textContent;
             navigator.clipboard.writeText(email).then(() => {
                 const button = document.querySelector('.email-container button');
                 button.textContent = 'تم النسخ';
