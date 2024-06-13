@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض الرسالة</title>
+    <title>رسالة مخصصة</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -20,11 +20,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            max-width: 600px;
-            margin: 50px auto;
+            margin: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
+        
         .message-view img {
             width: 100px;
             height: 100px;
@@ -54,25 +53,21 @@
 </head>
 <body>
     <div class="message-view" id="message-view">
-        <!-- سيتم إضافة تفاصيل الرسالة هنا ديناميكيًا -->
+        <img src="https://wa022.github.io/6/user.png" alt="User Image">
+        <p><strong>هدى الريحاني</strong></p>
+        <p>أبي الحبيب أنت النور الذي يضيء حياتي والنبع الذي أرتوي منه حباً وحناناً ، أنت الأب الذي يُشار إليه بالبنان ويفتخر به بين الأنام فهنيئاً لي بك أيها الأب العظيم.</p>
+        <button class="email-button" onclick="copyEmail()">نسخ البريد الإلكتروني</button>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const name = urlParams.get('name') || 'هدى الريحاني';
-            const email = urlParams.get('email') || 'houda@gmail.com';
-            const message = urlParams.get('message') || 'أبي الحبيب أنت النور الذي يضيء حياتي والنبع الذي أرتوي منه حباً وحناناً ، أنت الأب الذي يُشار إليه بالبنان ويفتخر به بين الأنام فهنيئاً لي بك أيها الأب العظيم.';
-
-            const messageView = document.getElementById('message-view');
-            messageView.innerHTML = `
-                <img src="https://wa022.github.io/6/user.png" alt="User Image">
-                <p><strong>${name}</strong></p>
-                <p>${message}</p>
-                <button class="email-button" onclick="navigator.clipboard.writeText('${email}').then(() => alert('تم نسخ البريد الإلكتروني إلى الحافظة'));">نسخ البريد الإلكتروني</button>
-            `;
-        });
+        function copyEmail() {
+            const email = "houda@gmail.com";
+            navigator.clipboard.writeText(email).then(() => {
+                alert("تم نسخ البريد الإلكتروني: " + email);
+            }).catch(err => {
+                console.error('خطأ في نسخ البريد الإلكتروني: ', err);
+            });
+        }
     </script>
 </body>
 </html>
-
