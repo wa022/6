@@ -217,8 +217,8 @@
         }
 
         .loading-image {
-            width: 50px;
-            height: 50px;
+            width: 80px;
+            height: 80px;
             animation: spin 2s linear infinite;
         }
 
@@ -264,17 +264,19 @@
         }
 
         .success-buttons button {
-            background-color: #ff6f61;
-            color: white;
+             background-color: #f2ab19;
+            color: #080808;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
+            width: 45%;
         }
 
         .success-buttons button:hover {
-            background-color: #e65c55;
+            background-color: #080808;
+            color: #f2ab19;
         }
     </style>
 </head>
@@ -310,12 +312,12 @@
         </div>
     </div>
     <div id="cover">
-        <img src="https://wa022.github.io/6/loading.gif" alt="Loading..." class="loading-image">
+        <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Loading..." class="loading-image">
         <span>جارٍ إرسال البيانات، يرجى الانتظار...</span>
     </div>
     <div class="main-content">
         <div class="column main">
-            <form id="uploadForm" action="https://script.google.com/macros/s/AKfycbyv9rfLmXT0Ry1zKwq9GPh0ZsjcIRCPnGmNwsDlDSITNwBHa6S35wiLKrs-jfxRd2Q/exec" method="POST" enctype="multipart/form-data" style="color: white;margin-left: 5%;margin-right: 5%;margin-bottom: 60px;margin-top: 50px;text-align: right;">
+            <form id="uploadForm" action="https://script.google.com/macros/s/AKfycbyv9rfLmXT0Ry1zKwq9GPh0ZsjcIRCPnGmNwsDlDSITNwBHa6S35wiLKrs-jfxRd2Q/exec" method="POST" enctype="multipart/form-data" style="">
                 <input type="hidden" value="" name="fileContent" id="fileContent">
                 <input type="hidden" value="" name="filename" id="filename">
                 <div class="input-box">
@@ -360,7 +362,7 @@
                     <textarea id="review" name="مراجعتي" rows="5" cols="33" class="form-input" placeholder="ادخلي مراجعتك للكتاب او الرواية" required></textarea>
                 </div>
                 <div class="button" style="width: 100%;">
-                    <button class="form-btn1" type="submit">إرسال المراجعة</button>
+                    <button class="form-btn" type="submit">إرسال</button>
                 </div>
             </form>
         </div>
@@ -368,10 +370,16 @@
             <h2>تم إرسال المراجعة بنجاح!</h2>
             <div class="success-buttons">
                 <button onclick="location.href='الرئيسية.html'">الرجوع للرئيسية</button>
-                <button onclick="location.href='إضافة مراجعة.html'">إضافة مراجعة أخرى</button>
+                <button onclick="location.href='إضافة مراجعة.html'">إضافة مراجعة</button>
             </div>
         </div>
+        
+         <div class="column secondary">
+            <!-- يمكن وضع محتوى إضافي هنا -->
+        </div>
+        
     </div>
+    
     <script>
         document.getElementById('menu-icon').addEventListener('click', function() {
             document.querySelector('.sidebar').classList.add('show');
@@ -415,7 +423,7 @@
 
             if (file) {
                 const para = document.createElement('p');
-                para.textContent = `File name: ${file.name}, file size: ${file.size} bytes.`;
+                para.textContent = ``;
                 preview.appendChild(para);
 
                 const image = document.createElement('img');
@@ -431,3 +439,4 @@
     </script>
 </body>
 </html>
+
