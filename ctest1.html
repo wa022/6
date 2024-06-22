@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم مراجعة الكتب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMARE8F8O0L1R8b3Od3/54Do1e00lKP5F11ydQm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            direction: rtl;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #080808;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            padding-left: 10%;
+            padding-right: 10%;
+        }
+
+        .navbar .logo img {
+            width: 50px;
+        }
+
+        .menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+        }
+
+        .menu a:hover {
+            color: #f2ab19;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 20px;
+            gap: 20px;
+        }
+
+        .column {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .column.main {
+            flex: 1 1 60%;
+        }
+
+        .column.secondary {
+            flex: 1 1 30%;
+        }
+
+        .sidebar {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: #383434;
+            color: white;
+            padding: 20px;
+            z-index: 1000;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+        .sidebar .close-btn {
+            text-align: left;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        .sidebar .logo {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.8em;
+        }
+
+        .sidebar nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 0;
+            border-radius: 20px 0 0 0;
+            display: block;
+            transition: background-color 0.3s;
+            padding-right: 15px;
+        }
+
+        .sidebar nav a:hover {
+            background-color: #f2ab19;
+            color: #080808;
+        }
+
+        .sidebar-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sidebar-footer a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .sidebar-footer a:hover {
+            color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .menu {
+                display: none;
+            }
+
+            .menu-toggle {
+                display: block;
+                margin-top: 5px;
+            }
+
+            .main-content {
+                flex-direction: column;
+            }
+
+            .column.main, .column.secondary {
+                flex: 1 1 100%;
+            }
+
+            .sidebar {
+                display: flex;
+                border-radius: 15px 0 0 0;
+            }
+        }
+
+        .form-label {
+            color: #333;
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+
+        .form-input {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: right;
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-btn {
+            background-color: #f2ab19;
+            color: #080808;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 30%;
+        }
+
+        .form-btn:hover {
+            background-color: #080808;
+            color: #f2ab19;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #f2ab19;
+            color: #f2ab19;
+            background-color: #fff;
+            padding: 10px 20px;
+            border-radius: 14px;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            margin-bottom: 20px;
+            width: 50%;
+        }
+
+        .custom-file-upload:hover {
+            background-color: #f2ab19;
+            color: #080808;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-image {
+            width: 80px;
+            height: 80px;
+            animation: spin 2s linear infinite;
+        }
+
+        #cover {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 999;
+        }
+
+        #cover img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #cover span {
+            display: none;
+            position: absolute;
+            text-align: center;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333;
+            font-size: 1.2em;
+        }
+
+        #success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .success-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .success-buttons button {
+             background-color: #f2ab19;
+            color: #080808;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 45%;
+        }
+
+        .success-buttons button:hover {
+            background-color: #080808;
+            color: #f2ab19;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo"><img src="https://wa022.github.io/6/logow.png" alt="شعار"></div>
+        <div class="menu-toggle">
+            <img style="width:25px;margin:3px;" id="menu-icon" src="https://wa022.github.io/6/menu.png" alt="Menu">
+        </div>
+        <div class="menu">
+            <a href="#">الرئيسية</a>
+            <a href="#">إضافة مراجعة</a>
+            <a href="#">إنشاء منشور</a>
+            <a href="#">الرسائل</a>
+            <a href="#">معلوماتي</a>
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="close-btn">
+            <img style="height: 20px;" id="close-icon" src="https://wa022.github.io/6/close.png" alt="Close">
+        </div>
+        <div class="logo"><img src="https://wa022.github.io/6/logow.png" alt="شعار" style="width: 80px;"></div>
+        <nav>
+            <a href="#">الرئيسية</a>
+            <a href="#">إضافة مراجعة</a>
+            <a href="#">إنشاء منشور</a>
+            <a href="#">الرسائل</a>
+            <a href="#">معلوماتي</a>
+        </nav>
+        <div class="sidebar-footer">
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+        </div>
+    </div>
+    <div id="cover">
+        <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" alt="Loading..." class="loading-image">
+        <span>جارٍ إرسال البيانات، يرجى الانتظار...</span>
+    </div>
+    <div class="main-content">
+        <div class="column main">
+            <form id="uploadForm" action="https://script.google.com/macros/s/AKfycbygQpU26bAQZvR2U6sh6lwT6FVsGMfXCDa33Gus3N0QpbL-fUJIJ38Dx_kSvLaCJnc1sQ/exec" method="POST" enctype="multipart/form-data" style="">
+                <input type="hidden" value="" name="fileContent" id="fileContent">
+                <input type="hidden" value="" name="filename" id="filename">
+                <div class="input-box">
+                    <label for="nama" class="form-label">عنوان الكتاب</label>
+                    <input type="text" id="nama" name="عنوان_الكتاب" class="form-input" placeholder="ادخلي عنوان الكتاب او الرواية" required>
+                </div>
+                <div class="input-box">
+                    <label for="email" class="form-label">اسم الكاتب</label>
+                    <input type="text" id="email" name="اسم_الكاتب" class="form-input" placeholder="ادخلي اسم الكاتب" required>
+                </div>
+                <div class="input-box">
+                    <label for="file" class="form-label">صورة الغلاف</label>
+                    <br><br>
+                    <label for="image_uploads" class="custom-file-upload">اختر صورة الغلاف</label>
+                    <input type="file" id="image_uploads" name="image_uploads" accept=".jpg, .jpeg, .png" onchange="updateImageDisplay();" style="display: none;" required />
+                    <div class="preview">
+                        <p>الصورة يجب أن تكون بصيغة PNG أو JPG</p>
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label for="tempat_lahir" class="form-label">عدد الصفحات</label>
+                    <input type="text" id="tempat_lahir" name="عدد_الصفحات" class="form-input" placeholder="ادخلي عدد الصفحات" required>
+                </div>
+                <div class="input-box">
+                    <label for="alamat" class="form-label">النوع</label>
+                    <input type="text" id="alamat" name="النوع" class="form-input" placeholder="ادخلي نوع الرواية او الكتاب" required>
+                </div>
+                <div class="input-box">
+                    <label for="kontak" class="form-label">تاريخ الاصدار</label>
+                    <input type="text" id="kontak" name="تاريخ_الاصدار" class="form-input" placeholder="ادخلي تاريخ صدور الكتاب او الرواية" required>
+                </div>
+                <div class="input-box">
+                    <label for="avi" class="form-label">التقييم</label>
+                    <input type="text" id="avi" name="التقييم" class="form-input" placeholder="ادخلي تقييمك (عدد النجوم من 1 الى 5)" required>
+                </div>
+                <div class="input-box">
+                    <label for="molakhas" class="form-label">الملخص</label>
+                    <textarea id="molakhas" name="الملخص" rows="5" cols="33" class="form-input" placeholder="ادخلي ملخصا للكتاب او الرواية" required></textarea>
+                </div>
+                <div class="input-box">
+                    <label for="review" class="form-label">مراجعتي للكتاب</label>
+                    <textarea id="review" name="مراجعتي" rows="5" cols="33" class="form-input" placeholder="ادخلي مراجعتك للكتاب او الرواية" required></textarea>
+                </div>
+                <div class="button" style="width: 100%;">
+                    <button class="form-btn" type="submit">إرسال</button>
+                </div>
+            </form>
+        </div>
+        <div id="success-message">
+            <h2>تم إرسال المراجعة بنجاح!</h2>
+            <div class="success-buttons">
+                <button onclick="location.href='الرئيسية.html'">الرجوع للرئيسية</button>
+                <button onclick="location.href='إضافة مراجعة.html'">إضافة مراجعة</button>
+            </div>
+        </div>
+        
+         <div class="column secondary">
+            <!-- يمكن وضع محتوى إضافي هنا -->
+        </div>
+        
+    </div>
+    
+    <script>
+        document.getElementById('menu-icon').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.add('show');
+        });
+
+        document.getElementById('close-icon').addEventListener('click', function() {
+            document.querySelector('.sidebar').classList.remove('show');
+        });
+
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var form = event.target;
+            var formData = new FormData(form);
+
+            document.getElementById('cover').style.display = 'block';
+
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                return response.json(); // إذا كنت تتوقع استجابة JSON
+            }).then(data => {
+                document.getElementById('cover').style.display = 'none';
+                document.querySelector('.main-content .column.main').style.display = 'none';
+                document.getElementById('success-message').style.display = 'block';
+            }).catch(error => {
+                document.getElementById('cover').style.display = 'none';
+                alert('حدث خطأ أثناء إرسال المراجعة. يرجى المحاولة مرة أخرى.');
+                console.error('Error:', error);
+            });
+        });
+
+        function updateImageDisplay() {
+            const input = document.getElementById('image_uploads');
+            const preview = document.querySelector('.preview');
+            const file = input.files[0];
+
+            while (preview.firstChild) {
+                preview.removeChild(preview.firstChild);
+            }
+
+            if (file) {
+                const para = document.createElement('p');
+                para.textContent = ``;
+                preview.appendChild(para);
+
+                const image = document.createElement('img');
+                image.src = URL.createObjectURL(file);
+                image.style.maxWidth = '100%';
+                preview.appendChild(image);
+            } else {
+                const para = document.createElement('p');
+                para.textContent = 'الصورة يجب أن تكون بصيغة PNG أو JPG';
+                preview.appendChild(para);
+            }
+        }
+    </script>
+</body>
+</html>
